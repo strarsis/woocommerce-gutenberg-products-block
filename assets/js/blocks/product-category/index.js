@@ -69,10 +69,6 @@ registerBlockType( 'woocommerce/product-category', {
 			// Deprecate shortcode save method in favor of dynamic rendering.
 			attributes: {
 				...sharedAttributes,
-				editMode: {
-					type: 'boolean',
-					default: true,
-				},
 				orderby: {
 					type: 'string',
 					default: 'date',
