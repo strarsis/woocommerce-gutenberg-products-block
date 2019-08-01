@@ -35,7 +35,7 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import ProductControl from '../../components/product-control';
-import ApiErrorPlaceholder from '../../components/api-error-placeholder';
+import { ProductApiErrorPlaceholder } from '../../components/api-error-placeholder';
 import {
 	dimRatioToClass,
 	getBackgroundImageStyles,
@@ -54,16 +54,7 @@ const MIN_HEIGHT = wc_product_block_data.min_height;
 /**
  * Component to handle edit mode of "Featured Product".
  */
-const FeaturedProduct = ( { attributes, debouncedSpeak, error, getProduct, isLoading, isSelected, overlayColor, product, setAttributes, setOverlayColor } ) => {
-	const renderApiError = () => (
-		<ApiErrorPlaceholder
-			className="wc-block-featured-product-error"
-			error={ error }
-			isLoading={ isLoading }
-			onRetry={ getProduct }
-		/>
-	);
-
+const FeaturedProduct = ( { attributes, debouncedSpeak, error, isLoading, isSelected, overlayColor, product, setAttributes, setOverlayColor } ) => {
 	const renderEditMode = () => {
 		const onDone = () => {
 			setAttributes( { editMode: false } );
@@ -311,10 +302,10 @@ const FeaturedProduct = ( { attributes, debouncedSpeak, error, getProduct, isLoa
 		</Placeholder>
 	);
 
-	const { editMode } = attributes;
+	const { editMode, productId } = attributes;
 
 	if ( error ) {
-		return renderApiError();
+		return <ProductApiErrorPlaceholder attributes={ { productId } } />;
 	}
 
 	if ( editMode ) {
