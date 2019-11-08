@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import ProductListContainer from '@woocommerce/base-components/product-list/container';
 import { InnerBlockParentNameProvider } from '@woocommerce/base-context/inner-block-parent-name-context';
 import { ProductLayoutContextProvider } from '@woocommerce/base-context/product-layout-context';
+import BlockErrorBoundary from './block-error-boundary';
 
 const layoutStyleContext = {
 	layoutStyleClassPrefix: 'wc-block-grid',
@@ -23,6 +24,7 @@ class Block extends Component {
 	};
 
 	render() {
+		console.log( 'render', BlockErrorBoundary );
 		const { attributes, urlParameterSuffix } = this.props;
 		/**
 		 * Todo classes
@@ -31,14 +33,16 @@ class Block extends Component {
 		 * wc-block-{$this->block_name},
 		 */
 		return (
-			<InnerBlockParentNameProvider value="woocommerce/all-products">
-				<ProductLayoutContextProvider value={ layoutStyleContext }>
-					<ProductListContainer
-						attributes={ attributes }
-						urlParameterSuffix={ urlParameterSuffix }
-					/>
-				</ProductLayoutContextProvider>
-			</InnerBlockParentNameProvider>
+			<BlockErrorBoundary>
+				<InnerBlockParentNameProvider value="woocommerce/all-products">
+					<ProductLayoutContextProvider value={ layoutStyleContext }>
+						<ProductListContainer
+							attributes={ attributes }
+							urlParameterSuffix={ urlParameterSuffix }
+						/>
+					</ProductLayoutContextProvider>
+				</InnerBlockParentNameProvider>
+			</BlockErrorBoundary>
 		);
 	}
 }

@@ -30,6 +30,7 @@ class ProductListContainer extends Component {
 		const { attributes, product_page, product_sort } = this.props;
 		const currentPage = parseInt( product_page );
 		const sortValue = product_sort || attributes.orderby; // eslint-disable-line camelcase
+		// throw new Error( 'error on start' );
 
 		return (
 			<ProductList
