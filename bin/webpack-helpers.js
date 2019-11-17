@@ -340,7 +340,7 @@ const getFrontConfig = ( options = {} ) => {
 				{
 					test: /\.s[c|a]ss$/,
 					use: {
-						loader: 'ignore-loader',
+						loader: 'ignore-loader', // @todo
 					},
 				},
 			],
